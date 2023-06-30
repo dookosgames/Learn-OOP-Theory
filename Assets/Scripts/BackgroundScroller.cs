@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
@@ -16,6 +14,11 @@ public class BackgroundScroller : MonoBehaviour
 
     [Header("Background Colors")]
     [SerializeField] Color[] _bgColors;
+
+
+    [Header("Depth")]
+    [SerializeField] TextMeshProUGUI _depthDisplay;
+    [SerializeField] int[] _depths;
 
 
 
@@ -39,7 +42,9 @@ public class BackgroundScroller : MonoBehaviour
         if (_player.transform.position.y <= _endPosY)
         {
             _player.transform.position = _startPos;
+            ChangeDepth();
             ChangeBackground();
+            
         }
 
         //selects background to change to once player reachs loops spot
@@ -56,6 +61,14 @@ public class BackgroundScroller : MonoBehaviour
             {
                 _bgCounter = 0;
             }
+        }
+
+        //selects depth that matches BG
+        void ChangeDepth()
+        {
+            //Sets depth for this bg
+            _depthDisplay.text = _depths[_bgCounter].ToString();
+            
         }
     }
 
