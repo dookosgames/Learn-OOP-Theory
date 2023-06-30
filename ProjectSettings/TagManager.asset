@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FallingObject
   - WaterSurface
+  - Water
   layers:
   - Default
   - TransparentFX
