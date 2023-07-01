@@ -16,6 +16,9 @@ enum HullType
 
 public class Vehicles : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] BackgroundScroller bgScroll;
+
     [Header("Basic Specs")]
     [SerializeField] float _health;
     [SerializeField] float _mass;
@@ -29,6 +32,10 @@ public class Vehicles : MonoBehaviour
     [Header ("Cosmetics")]
     [SerializeField] Sprite _designSprite;
     [SerializeField] TextMeshProUGUI _depthSubDisplay;
+    [SerializeField] ParticleSystem _Bubble1;
+    [SerializeField] ParticleSystem _Bubble2;
+    [SerializeField] ParticleSystem _Bubble3;
+
 
     public float GetHealth { get=> _health; }
     public float GetMass { get=>_mass;}
@@ -38,20 +45,25 @@ public class Vehicles : MonoBehaviour
     //physic stats    
     private float _psiPerFoot = .445f;
     private float _startingPsi = 14.7f;
-    private float _feetPerUnity = 37f;
-
-
     
 
+  
     private void Update()
     {
-        //tracks the current depth of the sub
-        if (transform.position.y < 0)
-        {
-            _currentDepth = -transform.position.y * _feetPerUnity;
-            _depthSubDisplay.text = _currentDepth.ToString("00");
-        }
+
+        //Input for drop
+
+        if (Input.GetKeyDown(KeyCode.Space)) { gameObject.GetComponent<Rigidbody2D>().gravityScale = 1; }
+
+
+        if (gameObject.transform.position.y > 0) { return; }
+
+        _currentDepth = (gameObject.GetComponent<SpriteRenderer>().bounds.center.y + (bgScroll._bgCounter * (bgScroll.yLength - bgScroll._startPos.y))) * bgScroll._feetPerUnit; //gets the current depth of the sub by checking for the bg tile currently displayed and the Y value
+        _depthSubDisplay.text = _currentDepth.ToString("00");
+       
         
+      
+
     }
 
     //Amount of damage the hull takes based on the depth of the sub
@@ -66,10 +78,22 @@ public class Vehicles : MonoBehaviour
     {
         if (collision.CompareTag("Water"))
         {
+            //hull starts to take damage once in water
             HullIntegrityLoss(_currentDepth);
+
         }
     }
 
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("WaterSurface"))
+        {
+            //bubbles begin
+            _Bubble1.Play();
+            _Bubble2.Play();
+            _Bubble3.Play();
+        }
+    }
+
 }

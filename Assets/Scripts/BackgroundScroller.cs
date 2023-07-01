@@ -1,14 +1,23 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class BackgroundScroller : MonoBehaviour
 {
 
-    [Header("Positions")]
-    private GameObject _player;
-    [SerializeField] Vector3 _startPos;
-    [SerializeField] float _endPosY;
+
+    [Header("References")]
     [SerializeField] SpriteRenderer _bgRenderer;
+    [SerializeField] SpriteShapeRenderer _topWater;
+    [SerializeField] SpriteRenderer _bottomWater;
+    private GameObject _player;
+
+
+    [Header("Positions")]
+    [SerializeField] Vector3 _endPosY;
+    public Vector3 _startPos { get; private set; }    
+    public float yLength { get; private set; } //y length of the water background sprite
 
 
 
@@ -19,14 +28,28 @@ public class BackgroundScroller : MonoBehaviour
     [Header("Depth")]
     [SerializeField] TextMeshProUGUI _depthDisplay;
     [SerializeField] int[] _depths;
+    public float _feetPerUnit { get; private set; }
+    [SerializeField] int _depthOfWaterLevel;
+    public int GetDepthOfWater { get { return _depthOfWaterLevel; } }
+    
 
 
-
-    private int _bgCounter = 0;
+    public int _bgCounter { get; private set; }
 
     private void Start()
     {
         _player = gameObject;
+
+        //get y size of water tile
+        yLength=_bgRenderer.bounds.min.y;
+
+        //set feet per unit
+        _feetPerUnit = _depthOfWaterLevel/yLength;
+
+        //set startPos
+        _startPos = new Vector3(0,_bgRenderer.bounds.max.y,0);
+        //set EndPos
+        _endPosY = _bgRenderer.bounds.min;
     }
 
     private void Update()
@@ -39,12 +62,11 @@ public class BackgroundScroller : MonoBehaviour
     //Resets the background
     private void ResetBackground()
     {
-        if (_player.transform.position.y <= _endPosY)
+        if (_player.GetComponent<SpriteRenderer>().bounds.center.y <= _endPosY.y)
         {
             _player.transform.position = _startPos;
             ChangeDepth();
             ChangeBackground();
-            
         }
 
         //selects background to change to once player reachs loops spot
@@ -52,6 +74,8 @@ public class BackgroundScroller : MonoBehaviour
         {
             //sets new background color
             _bgRenderer.color = _bgColors[_bgCounter];
+            _topWater.color = _bgColors[_bgCounter];
+            _bottomWater.color = _bgColors[_bgCounter];
 
             //Moves to next index
             _bgCounter++;
