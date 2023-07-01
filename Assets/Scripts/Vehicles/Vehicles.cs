@@ -45,15 +45,31 @@ public class Vehicles : MonoBehaviour
     //physic stats    
     private float _psiPerFoot = .445f;
     private float _startingPsi = 14.7f;
-    
 
-  
+
+    private void OnEnable()
+    {
+        GameManager.A_GameState += DropSub;
+    }
+    private void OnDisable()
+    {
+        GameManager.A_GameState -= DropSub;
+    }
+
+
+    //listens for game to be in play to drop sub
+    private void DropSub(GameState state)
+    {
+
+        if (state == GameState.playing) { gameObject.GetComponent<Rigidbody2D>().gravityScale = 1; }
+        else { gameObject.GetComponent<Rigidbody2D>().gravityScale = 0; }
+
+    }
+
     private void Update()
     {
 
-        //Input for drop
-
-        if (Input.GetKeyDown(KeyCode.Space)) { gameObject.GetComponent<Rigidbody2D>().gravityScale = 1; }
+       
 
 
         if (gameObject.transform.position.y > 0) { return; }
