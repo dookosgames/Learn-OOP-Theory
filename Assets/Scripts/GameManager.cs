@@ -9,9 +9,9 @@ public enum GameState
 }
 public class GameManager : MonoBehaviour
 {
-
+    //Game State Broadcast
     public static event Action<GameState> A_GameState;
-
+   
 
     public GameState currentGameState { get; private set; }
 

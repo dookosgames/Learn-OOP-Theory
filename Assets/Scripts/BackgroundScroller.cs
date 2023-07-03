@@ -11,7 +11,7 @@ public class BackgroundScroller : MonoBehaviour
     [SerializeField] SpriteRenderer _bgRenderer;
     [SerializeField] SpriteShapeRenderer _topWater;
     [SerializeField] SpriteRenderer _bottomWater;
-    private GameObject _player;
+    [SerializeField] GameObject _player;
 
 
     [Header("Positions")]
@@ -38,8 +38,6 @@ public class BackgroundScroller : MonoBehaviour
 
     private void Start()
     {
-        _player = gameObject;
-
         //get y size of water tile
         yLength=_bgRenderer.bounds.min.y;
 

@@ -1,7 +1,5 @@
-using JetBrains.Annotations;
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +14,7 @@ enum HullType
 
 public class Vehicles : MonoBehaviour
 {
+
     [Header("References")]
     [SerializeField] BackgroundScroller bgScroll;
 
@@ -69,17 +68,11 @@ public class Vehicles : MonoBehaviour
     private void Update()
     {
 
-       
-
-
         if (gameObject.transform.position.y > 0) { return; }
 
         _currentDepth = (gameObject.GetComponent<SpriteRenderer>().bounds.center.y + (bgScroll._bgCounter * (bgScroll.yLength - bgScroll._startPos.y))) * bgScroll._feetPerUnit; //gets the current depth of the sub by checking for the bg tile currently displayed and the Y value
         _depthSubDisplay.text = _currentDepth.ToString("00");
        
-        
-      
-
     }
 
     //Amount of damage the hull takes based on the depth of the sub
@@ -99,7 +92,6 @@ public class Vehicles : MonoBehaviour
 
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
