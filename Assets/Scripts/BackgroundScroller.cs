@@ -36,6 +36,21 @@ public class BackgroundScroller : MonoBehaviour
 
     public int _bgCounter { get; private set; }
 
+
+    private void OnEnable()
+    {
+        SubSelectManager.a_ActiveSub += ActivePlayer;
+    }
+    private void OnDisable()
+    {
+        SubSelectManager.a_ActiveSub -= ActivePlayer;
+    }
+
+    void ActivePlayer(GameObject sub)
+    {
+        _player = sub;
+    }
+
     private void Start()
     {
         //get y size of water tile

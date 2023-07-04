@@ -50,6 +50,8 @@ public class Vehicles : MonoBehaviour
     {
         GameManager.A_GameState += DropSub;
     }
+
+
     private void OnDisable()
     {
         GameManager.A_GameState -= DropSub;

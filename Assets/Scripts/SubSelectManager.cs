@@ -1,27 +1,33 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SubSelectManager : MonoBehaviour
 {
 
 
-    //Action called when Sub is chosen to be used (active sub)
-    public static event Action<GameObject> a_ActiveSub;
-
     [SerializeField] GameObject[] SubsToChoose;
+
+    [Header("Sub Selected Stuff")]
     [SerializeField] GameObject _SubSelected;
+    [SerializeField] TextMeshProUGUI _SubName;
+    [SerializeField] TextMeshProUGUI _HullStrength;
+    [SerializeField] TextMeshProUGUI _PassengerCapcity;
+    
  
     //index num of sub selected in array
     private int currentIndex = 0;
 
+
+    //Action called when Sub is chosen to be used (active sub)
+    public static event Action<GameObject> a_ActiveSub;
 
     private void Start()
     {
         //Start game wiht default sub selected
         _SubSelected = SubsToChoose[0];
         _SubSelected.SetActive(true);
+        DisplaySubInfo();
         a_ActiveSub.Invoke(_SubSelected);
         
     }
@@ -37,11 +43,20 @@ public class SubSelectManager : MonoBehaviour
         {
             _SubSelected.SetActive(false);
             _SubSelected = SubsToChoose[currentIndex];
+            DisplaySubInfo();
             _SubSelected.SetActive(true);
+
+
+            
 
             //Broadcast active sub
             a_ActiveSub.Invoke(_SubSelected);
         }
         
+    }
+
+    private void DisplaySubInfo()
+    {
+        _SubName.text = _SubSelected.name;
     }
 }
