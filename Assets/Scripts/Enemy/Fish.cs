@@ -8,10 +8,6 @@ public class Fish : Enemy
 
 
 
-    
-    public override void DoSomething()
-    {
-        Debug.Log("Hello2");
-    }
+   
 
 }

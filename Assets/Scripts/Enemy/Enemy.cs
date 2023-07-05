@@ -11,15 +11,12 @@ public class Enemy : MonoBehaviour
 
 
 
-    public virtual void DoSomething()
-    {
-        Debug.Log("Hello");
-    }
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        DoSomething();
+        if (collision.gameObject.GetComponent<Vehicles>())
+        {
+            Debug.Log("Player hit");
+        }
     }
 
 
