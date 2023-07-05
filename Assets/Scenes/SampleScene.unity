@@ -16384,6 +16384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e1dab4eb6ca4a4e89ecd5c511ec98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _BottomSpawnerPos: {fileID: 1676987552}
+  _LeftSpawnerPos: {fileID: 0}
+  _RightSpawnerPos: {fileID: 0}
+  _Obstacles:
+  - {fileID: 5651543419285104203, guid: b246bfa4119a84e4198e64cd50fd2b5f, type: 3}
 --- !u!4 &262922774
 Transform:
   m_ObjectHideFlags: 0
@@ -16392,7 +16397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262922772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4451063, y: -20.854006, z: -0.168157}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
