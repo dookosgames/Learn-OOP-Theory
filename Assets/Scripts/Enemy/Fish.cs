@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
+
+
+//INHERITANCE
 public class Fish : Enemy
 {
-    [SerializeField] float _RightMax;
-    [SerializeField] float _LeftMax;
+    [SerializeField] float _distanceToMove;
+    [SerializeField] float _ocilationSpeed;
 
 
     private void Update()
@@ -15,17 +18,24 @@ public class Fish : Enemy
     }
 
 
+    //POLYMORPHISM
     //Add side to side motion to up movement
     public override void MoveUp()
     {
         //Move up
         base.MoveUp();
 
-
-        float randomMove = Random.Range(_LeftMax, _RightMax);
         ////Add right and left movemnt too
         //transform.position += transform.right * randomMove * Time.deltaTime;
 
-        transform.position = transform.position + transform.right*Mathf.Sin(Time.time*_LeftMax)*_RightMax;
+        transform.position =transform.position+ transform.right*Mathf.Cos(Time.time*RandomSpeed())*RandomMag();
+
+
+
+        //ABSTRACTION
+        //Funcitons to get random floats for COS
+        float RandomSpeed() { float speed = Random.Range(-_ocilationSpeed, _ocilationSpeed); return speed; }
+        float RandomMag() { float mag = Random.Range(-_distanceToMove, _distanceToMove); return mag; }
     }
+
 }

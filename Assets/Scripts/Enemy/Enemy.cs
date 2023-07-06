@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class Enemy : MonoBehaviour
 {
 
     [SerializeField] float _MoveSpeed;
+
+    [Header("Amount this enemy damages")]
+    [SerializeField] float _DamageAmount;
 
   
     public virtual void MoveUp()
@@ -18,10 +22,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Vehicles>())
+        if (collision.gameObject.TryGetComponent<Vehicles>(out Vehicles comp))
         {
-            Debug.Log("Player hit");
+            comp.Damage(_DamageAmount);
         }
     }
 
+    
 }
