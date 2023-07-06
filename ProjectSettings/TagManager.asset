@@ -7,6 +7,7 @@ TagManager:
   - FallingObject
   - WaterSurface
   - Water
+  - ObstacleBarrier
   layers:
   - Default
   - TransparentFX

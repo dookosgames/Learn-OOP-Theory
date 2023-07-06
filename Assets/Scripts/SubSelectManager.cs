@@ -11,8 +11,9 @@ public class SubSelectManager : MonoBehaviour
     [Header("Sub Selected Stuff")]
     [SerializeField] GameObject _SubSelected;
     [SerializeField] TextMeshProUGUI _SubName;
-    [SerializeField] TextMeshProUGUI _HullStrength;
-    [SerializeField] TextMeshProUGUI _PassengerCapcity;
+    [SerializeField] TextMeshProUGUI _Health;
+    [SerializeField] TextMeshProUGUI _Hull;
+    
     
  
     //index num of sub selected in array
@@ -58,5 +59,7 @@ public class SubSelectManager : MonoBehaviour
     private void DisplaySubInfo()
     {
         _SubName.text = _SubSelected.name;
+        _Health.text = "Health: "+_SubSelected.GetComponent<Vehicles>().GetHealth.ToString();
+        _Hull.text = "Hull: "+_SubSelected.GetComponent<Vehicles>().GetHull.ToString();
     }
 }

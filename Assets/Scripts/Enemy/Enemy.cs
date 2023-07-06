@@ -20,6 +20,10 @@ public class Enemy : MonoBehaviour
     }
    
 
+    //Despawn
+
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent<Vehicles>(out Vehicles comp))

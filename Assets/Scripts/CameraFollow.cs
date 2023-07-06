@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    private GameObject _player=null;
-    [SerializeField] Camera cam;
+    public GameObject _player { get; private set; }
+    public Camera cam { get; private set; }
 
     
     public float cameraWidthL { get; private set; }
@@ -24,6 +24,8 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
+        _player = null;
+        cam = gameObject.GetComponent<Camera>();
         FindViewBoundry();
     }
 

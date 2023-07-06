@@ -77,7 +77,7 @@ public class BackgroundScroller : MonoBehaviour
     {
         if (_player.GetComponent<SpriteRenderer>().bounds.center.y <= _endPosY.y)
         {
-            _player.transform.position = _startPos;
+            _player.transform.position = new Vector2(_player.transform.position.x, _startPos.y);
             ChangeDepth();
             ChangeBackground();
         }
