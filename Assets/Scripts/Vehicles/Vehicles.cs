@@ -51,7 +51,6 @@ public class Vehicles : MonoBehaviour
         GameManager.A_GameState += DropSub;
     }
 
-
     private void OnDisable()
     {
         GameManager.A_GameState -= DropSub;
@@ -61,7 +60,6 @@ public class Vehicles : MonoBehaviour
     //listens for game to be in play to drop sub
     private void DropSub(GameState state)
     {
-
         if (state == GameState.playing) { gameObject.GetComponent<Rigidbody2D>().gravityScale = 1; }
         else { gameObject.GetComponent<Rigidbody2D>().gravityScale = 0; }
 
@@ -77,23 +75,20 @@ public class Vehicles : MonoBehaviour
        
     }
 
-    //Amount of damage the hull takes based on the depth of the sub
-    public void HullIntegrityLoss(float depth)
-    {   
-        _hullStrength -=  -depth * _psiPerFoot;
-    }
 
-  
 
-    private void OnTriggerStay2D(Collider2D collision)
+    //Damage Taken
+    public void Damage(float dam)
     {
-        if (collision.CompareTag("Water"))
-        {
-            //hull starts to take damage once in water
-            HullIntegrityLoss(_currentDepth);
+        if (_hullStrength > 0) { _hullStrength -= dam; }
+        else if (_health > 0) { _health -= dam; }
 
-        }
+        if (_health<=0) {  }
     }
+
+
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -104,6 +99,9 @@ public class Vehicles : MonoBehaviour
             _Bubble2.Play();
             _Bubble3.Play();
         }
+
     }
+
+
 
 }

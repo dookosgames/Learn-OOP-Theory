@@ -5,8 +5,11 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     private GameObject _player=null;
-    [SerializeField] float zOffset;
+    [SerializeField] Camera cam;
 
+    
+    public float cameraWidthL { get; private set; }
+    public float cameraWidthR { get; private set; }
 
 
     private void OnEnable()
@@ -16,6 +19,12 @@ public class CameraFollow : MonoBehaviour
     private void OnDisable()
     {
         SubSelectManager.a_ActiveSub -= SetSubToFollow;
+    }
+
+
+    private void Start()
+    {
+        FindViewBoundry();
     }
 
     private void Update()
@@ -32,5 +41,12 @@ public class CameraFollow : MonoBehaviour
     }
 
 
+    //Finds the boundries of the camera to be used to determine where to spawn enemies
+    void FindViewBoundry()
+    {
+        cameraWidthL = cam.ViewportToWorldPoint(new Vector3(0, 0, 0)).x;
+        cameraWidthR= cam.ViewportToWorldPoint(new Vector3(1,0, 0)).x;
+
+    }
 
 }
