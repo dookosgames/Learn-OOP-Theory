@@ -3,15 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class SpawnManager : MonoBehaviour
 {
     [Header("Spawner Positions")]
     [SerializeField] Transform _BottomSpawnerPos;
-    
+    [SerializeField] Transform _leftSpawnMax;
+    [SerializeField] Transform _leftSpawnMin;
+
 
     [Header("Obstacles to Spawn")]
-    [SerializeField] List<Enemy> _Obstacles;
+    [SerializeField] List<Enemy> _HorizontalObs;
+    [SerializeField] List<Enemy> _BottomObs
+        ;
 
     //Spawnable area defined by Camera Viewport in the CameraFollow script
     [SerializeField] CameraFollow camFollow;
@@ -45,25 +50,37 @@ public class SpawnManager : MonoBehaviour
         while (currentState==GameState.playing)
         {
             yield return new WaitForSeconds(_repeatWaitTime);
-            Spawn(_BottomSpawnerPos);
+            SpawnLeft();
+            SpawnBottom();
         }
 
     }
 
     //ABSTRACTION
-    private Enemy Spawn(Transform pos)
+    private void SpawnBottom()
     {
         //choose random obstacle to spawn
-        int index = Random.Range(0, _Obstacles.Count);
+        int index = Random.Range(0, _BottomObs.Count);
 
         //choose random X to spawn it
         float x = Random.Range(camFollow.cameraWidthL,camFollow.cameraWidthR);
 
-        Vector2 newPos = new Vector2(x, pos.position.y);
+        Vector2 newPos = new Vector2(x, _BottomSpawnerPos.position.y);
 
-        Enemy enemy=Instantiate(_Obstacles[index], newPos, Quaternion.identity);
+        Enemy enemy=Instantiate(_BottomObs[index], newPos, Quaternion.identity);
 
-        return enemy;
+    }
+
+    private void SpawnLeft()
+    {
+        //choose random obstacle to spawn
+        int index = Random.Range(0, _HorizontalObs.Count);
+        float yRand = Random.Range(_leftSpawnMin.position.y, _leftSpawnMax.position.y);
+
+        Vector2 newPos = new Vector2(_leftSpawnMax.position.x, yRand);
+
+        Enemy enemy = Instantiate(_HorizontalObs[index], newPos, Quaternion.identity);
+
     }
 
 

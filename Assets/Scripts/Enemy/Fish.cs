@@ -10,32 +10,36 @@ public class Fish : Enemy
 {
     [SerializeField] float _distanceToMove;
     [SerializeField] float _ocilationSpeed;
+    [SerializeField] float _moveSpeedRange;
 
+    private void Start()
+    {
+        //Funcitons to get random floats for COS
+        RandomizeSpeed();
+        _ocilationSpeed= Random.Range(-_ocilationSpeed, _ocilationSpeed);
+        _distanceToMove = Random.Range(-_distanceToMove, _distanceToMove);
+    }
 
     private void Update()
     {
-        MoveUp();
+        MoveRight();
     }
-
+    
 
     //POLYMORPHISM
-    //Add side to side motion to up movement
-    public override void MoveUp()
+    //Adds up wobble to motion
+    public override void MoveRight()
     {
-        //Move up
-        base.MoveUp();
+        base.MoveRight();
 
-        ////Add right and left movemnt too
-        //transform.position += transform.right * randomMove * Time.deltaTime;
+        transform.position = transform.position + transform.up * Mathf.Sin(Time.time * _ocilationSpeed) * _distanceToMove;
 
-        transform.position =transform.position+ transform.right*Mathf.Cos(Time.time*RandomSpeed())*RandomMag();
+    }
 
-
-
-        //ABSTRACTION
-        //Funcitons to get random floats for COS
-        float RandomSpeed() { float speed = Random.Range(-_ocilationSpeed, _ocilationSpeed); return speed; }
-        float RandomMag() { float mag = Random.Range(-_distanceToMove, _distanceToMove); return mag; }
+    //Randomize Move Speed from Parent classe "Enemy"
+    private void RandomizeSpeed()
+    {
+        _MoveSpeed = Random.Range(0, _moveSpeedRange);
     }
 
 }

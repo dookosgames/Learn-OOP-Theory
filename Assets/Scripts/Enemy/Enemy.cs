@@ -8,7 +8,7 @@ using static Unity.Burst.Intrinsics.X86.Avx;
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] float _MoveSpeed;
+    public float _MoveSpeed;
 
     [Header("Amount this enemy damages")]
     [SerializeField] float _DamageAmount;
@@ -18,11 +18,17 @@ public class Enemy : MonoBehaviour
     {
         transform.position += transform.up*_MoveSpeed*Time.deltaTime;
     }
-   
+    public virtual void MoveRight()
+    {
+        transform.position += transform.right * _MoveSpeed * Time.deltaTime;
+    }
+    public virtual void MoveLeft()
+    {
+        transform.position += -transform.right * _MoveSpeed * Time.deltaTime;
+    }
+
 
     //Despawn
-
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

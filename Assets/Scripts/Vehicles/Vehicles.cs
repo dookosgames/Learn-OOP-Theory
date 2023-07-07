@@ -8,11 +8,6 @@ using UnityEngine;
 
 //37 feet per 1 unity measure
 
-enum HullType
-{
-    sphere,cylinder,rectangle
-}
-
 public class Vehicles : MonoBehaviour
 {
 
@@ -26,10 +21,6 @@ public class Vehicles : MonoBehaviour
     [SerializeField] float _hullStrength;
     [SerializeField] float _currentDepth;
 
-
-    [Header("Hull Specs")]
-    [SerializeField] HullType _hullType;
-
     [Header ("Cosmetics")]
     [SerializeField] Sprite _designSprite;
     [SerializeField] TextMeshProUGUI _depthSubDisplay;
@@ -40,11 +31,13 @@ public class Vehicles : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float _moveSpeed;
 
+    //GETS
     public float GetHealth { get=> _health; }
     public float GetHull { get => _hullStrength; }
     public float GetMass { get=>_mass;}
     public Sprite GetDesignSprite { get => _designSprite; }
-
+    
+   
 
     //physic stats    
     private float _psiPerFoot = .445f;
@@ -111,6 +104,8 @@ public class Vehicles : MonoBehaviour
             _Bubble2.Play();
             _Bubble3.Play();
         }
+
+       
 
     }
 

@@ -78,26 +78,33 @@ public class BackgroundScroller : MonoBehaviour
         if (_player.GetComponent<SpriteRenderer>().bounds.center.y <= _endPosY.y)
         {
             _player.transform.position = new Vector2(_player.transform.position.x, _startPos.y);
-            ChangeDepth();
+            //ChangeDepth();
             ChangeBackground();
         }
 
         //selects background to change to once player reachs loops spot
         void ChangeBackground()
         {
-            //sets new background color
-            _bgRenderer.color = _bgColors[_bgCounter];
-            _topWater.color = _bgColors[_bgCounter];
-            _bottomWater.color = _bgColors[_bgCounter];
+
+            //check index to make sure its valid
+            if (_bgCounter < _bgColors.Length)
+            {
+                //sets new background color
+                _bgRenderer.color = _bgColors[_bgCounter];
+                _topWater.color = _bgColors[_bgCounter];
+                _bottomWater.color = _bgColors[_bgCounter];
+                
+            }
+            
 
             //Moves to next index
             _bgCounter++;
 
-            //check index to make sure its valid
-            if (_bgCounter > _bgColors.Length-1)
-            {
-                _bgCounter = 0;
-            }
+            ////check index to make sure its valid
+            //if (_bgCounter > _bgColors.Length-1)
+            //{
+            //    _bgCounter = 0;
+            //}
         }
 
         //selects depth that matches BG
