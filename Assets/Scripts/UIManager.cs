@@ -6,8 +6,10 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
+    [SerializeField] GameObject[] Panels;
 
     [SerializeField] GameObject _StartPanel;
+    [SerializeField] GameObject _Gameover;
 
     private void OnEnable()
     {
@@ -23,14 +25,15 @@ public class UIManager : MonoBehaviour
         switch (state)
         {
             case GameState.start:
-                _StartPanel.SetActive(true);
+                TogglePanels(_StartPanel);
                 break;
             case GameState.playing:
-                _StartPanel.SetActive(false);
+                TogglePanels();
                 break;
             case GameState.pause:
                 break;
             case GameState.gameover:
+                TogglePanels(_Gameover);
                 break;
             default:
                 break;
@@ -38,11 +41,28 @@ public class UIManager : MonoBehaviour
     }
 
 
-
-
-    //DIVE Button
-    public void DiveButtonPress()
+    //Restart Button Press
+    public void RestartButton()
     {
 
     }
+
+    //Toggle Panels
+    private void TogglePanels(GameObject panelToShow)
+    {
+        foreach(GameObject panel in Panels)
+        {
+            if (panel == panelToShow) { panel.SetActive(true); }
+            else { panel.SetActive(false); }
+        }
+    }
+    private void TogglePanels()
+    {
+        foreach(GameObject panel in Panels)
+        {
+           panel.SetActive(false);
+        }
+    }
+
+
 }

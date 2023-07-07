@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86.Avx;
+
 
 public class Enemy : MonoBehaviour
 {
@@ -13,7 +10,16 @@ public class Enemy : MonoBehaviour
     [Header("Amount this enemy damages")]
     [SerializeField] float _DamageAmount;
 
-  
+
+    private void OnEnable()
+    {
+        GameManager.A_GameState += DespawnEnemy;
+    }
+    private void OnDisable()
+    {
+        GameManager.A_GameState -= DespawnEnemy;
+    }
+
     public virtual void MoveUp()
     {
         transform.position += transform.up*_MoveSpeed*Time.deltaTime;
@@ -28,6 +34,14 @@ public class Enemy : MonoBehaviour
     }
 
 
+    //Destroy enemies if game is over
+    private void DespawnEnemy(GameState state)
+    {
+        //destroy if gamestate is GameOver
+        if (state == GameState.gameover ) { Destroy(gameObject); }
+        
+    }
+
     //Despawn
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,6 +49,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Vehicles>(out Vehicles comp))
         {
             comp.Damage(_DamageAmount);
+            Destroy(gameObject);
         }
     }
 

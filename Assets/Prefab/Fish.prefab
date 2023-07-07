@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MoveSpeed: 2
-  _DamageAmount: 10
+  _DamageAmount: 50
   _distanceToMove: 0.05
   _ocilationSpeed: 1
   _moveSpeedRange: 2

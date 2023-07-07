@@ -16,6 +16,16 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState { get; private set; }
 
 
+    private void OnEnable()
+    {
+        //listens for player death
+        Vehicles.a_PlayerHealth += PlayerDead;
+    }
+    private void OnDisable()
+    {
+        Vehicles.a_PlayerHealth -= PlayerDead;
+    }
+
     private void Start()
     {
         currentGameState = GameState.start;
@@ -50,7 +60,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    private void PlayerDead() { SetGameState(GameState.gameover); }
 
     //DIVE BUTTON
     public void DiveButtonPress()

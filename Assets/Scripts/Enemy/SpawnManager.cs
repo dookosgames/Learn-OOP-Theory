@@ -15,8 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Obstacles to Spawn")]
     [SerializeField] List<Enemy> _HorizontalObs;
-    [SerializeField] List<Enemy> _BottomObs
-        ;
+    [SerializeField] List<Enemy> _BottomObs;
 
     //Spawnable area defined by Camera Viewport in the CameraFollow script
     [SerializeField] CameraFollow camFollow;
@@ -39,6 +38,7 @@ public class SpawnManager : MonoBehaviour
         currentState = state;
 
         if (state == GameState.playing) { StartCoroutine(SpawnNow()); }
+        else if (state == GameState.gameover) { StopCoroutine(SpawnNow()); }
     }
 
 

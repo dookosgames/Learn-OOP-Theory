@@ -36,8 +36,10 @@ public class Vehicles : MonoBehaviour
     public float GetHull { get => _hullStrength; }
     public float GetMass { get=>_mass;}
     public Sprite GetDesignSprite { get => _designSprite; }
-    
-   
+
+
+    //Action: Player Health 0
+    public static event Action a_PlayerHealth;
 
     //physic stats    
     private float _psiPerFoot = .445f;
@@ -84,9 +86,10 @@ public class Vehicles : MonoBehaviour
     public void Damage(float dam)
     {
         if (_hullStrength > 0) { _hullStrength -= dam; }
-        else if (_health > 0) { _health -= dam; }
+        else if (_hullStrength<=0) { _health -= dam; }
 
-        if (_health<=0) {  }
+        //Player health zero
+        if (_health<=0) { a_PlayerHealth.Invoke(); }
     }
 
 
