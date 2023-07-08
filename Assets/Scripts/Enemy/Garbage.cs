@@ -22,6 +22,7 @@ public class Garbage : Enemy
     }
 
 
+    //POLYMORPHISM
     public override void MoveUp()
     {
         base.MoveUp();

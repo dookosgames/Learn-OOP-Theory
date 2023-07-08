@@ -8,6 +8,7 @@ public class CameraFollow : MonoBehaviour
     public Camera cam { get; private set; }
 
     
+    //ENCAPSULATION
     public float cameraWidthL { get; private set; }
     public float cameraWidthR { get; private set; }
 
@@ -42,7 +43,7 @@ public class CameraFollow : MonoBehaviour
         _player = sub;
     }
 
-
+    //ABSTRACTIONS
     //Finds the boundries of the camera to be used to determine where to spawn enemies
     void FindViewBoundry()
     {

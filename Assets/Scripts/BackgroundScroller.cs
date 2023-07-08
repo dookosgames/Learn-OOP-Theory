@@ -82,6 +82,8 @@ public class BackgroundScroller : MonoBehaviour
             ChangeBackground();
         }
 
+
+        //ABSTRACTION
         //selects background to change to once player reachs loops spot
         void ChangeBackground()
         {

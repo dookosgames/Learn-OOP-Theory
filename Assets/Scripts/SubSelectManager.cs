@@ -8,14 +8,14 @@ public class SubSelectManager : MonoBehaviour
 
     [SerializeField] GameObject[] SubsToChoose;
 
-    [Header("Sub Selected Stuff")]
-    [SerializeField] GameObject _SubSelected;
+    [Header("Sub Selected Stuff")]   
     [SerializeField] TextMeshProUGUI _SubName;
     [SerializeField] TextMeshProUGUI _Health;
     [SerializeField] TextMeshProUGUI _Hull;
-    
-    
- 
+    public GameObject _SubSelected { get; private set; }
+
+
+
     //index num of sub selected in array
     private int currentIndex = 0;
 

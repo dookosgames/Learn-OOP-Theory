@@ -31,7 +31,7 @@ public class Vehicles : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float _moveSpeed;
 
-    //GETS
+    //ENCAPSULATION
     public float GetHealth { get=> _health; }
     public float GetHull { get => _hullStrength; }
     public float GetMass { get=>_mass;}
@@ -68,15 +68,13 @@ public class Vehicles : MonoBehaviour
     private void Update()
     {
 
-        if (gameObject.transform.position.y > 0) { return; }
-
-        _currentDepth = (gameObject.GetComponent<SpriteRenderer>().bounds.center.y + (bgScroll._bgCounter * (bgScroll.yLength - bgScroll._startPos.y))) * bgScroll._feetPerUnit; //gets the current depth of the sub by checking for the bg tile currently displayed and the Y value
-        _depthSubDisplay.text = _currentDepth.ToString("00");
-
-
         //Input to detect Movement
         if (Input.GetKeyDown(KeyCode.A)) { MoveLeft(); }
         else if (Input.GetKeyDown(KeyCode.D)) { MoveRight(); }
+
+        //keep player in bounds
+        if (transform.position.x < -3) { transform.position = new Vector2(-3, transform.position.y); }
+        if (transform.position.x> 3) { transform.position = new Vector2(3, transform.position.y); }
 
     }
 
@@ -108,6 +106,13 @@ public class Vehicles : MonoBehaviour
             _Bubble3.Play();
         }
 
+        if (collision.CompareTag("ObstacleBarrier"))
+        {
+            Debug.Log("in barrier");
+
+            if (transform.position.x < 0) { rb.AddForce(Vector2.right * _moveSpeed * 2f, ForceMode2D.Impulse); }
+            if (transform.position.x > 0) { rb.AddForce(Vector2.left * _moveSpeed *2f, ForceMode2D.Impulse); }
+        }
        
 
     }

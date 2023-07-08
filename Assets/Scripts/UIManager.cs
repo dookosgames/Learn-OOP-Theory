@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject[] Panels;
 
     [SerializeField] GameObject _StartPanel;
+    [SerializeField] GameObject _PlayingPanel;
     [SerializeField] GameObject _Gameover;
 
     private void OnEnable()
@@ -20,6 +22,12 @@ public class UIManager : MonoBehaviour
         GameManager.A_GameState -= ChangeUI;
     }
 
+    //ensures that when game starts, Start panel is on
+    private void Start()
+    {
+        ChangeUI(GameState.start);
+    }
+
     private void ChangeUI(GameState state)
     {
         switch (state)
@@ -28,7 +36,7 @@ public class UIManager : MonoBehaviour
                 TogglePanels(_StartPanel);
                 break;
             case GameState.playing:
-                TogglePanels();
+                TogglePanels(_PlayingPanel);
                 break;
             case GameState.pause:
                 break;
@@ -44,7 +52,7 @@ public class UIManager : MonoBehaviour
     //Restart Button Press
     public void RestartButton()
     {
-
+        SceneManager.LoadScene(0);
     }
 
     //Toggle Panels
