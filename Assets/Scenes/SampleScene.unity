@@ -16796,7 +16796,9 @@ MonoBehaviour:
   _BottomObs:
   - {fileID: 6313884751170706987, guid: 4e8ad9e86ea3d8845aeb3d22059ff6bc, type: 3}
   camFollow: {fileID: 519420033}
+  _BGScroller: {fileID: 1534687308}
   _repeatWaitTime: 3
+  difficultMod: 0.75
 --- !u!4 &262922774
 Transform:
   m_ObjectHideFlags: 0
@@ -16863,7 +16865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.038576365, a: 1}
+  m_Color: {r: 0.036356345, g: 0.4056604, b: 0.0508389, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -52973,7 +52975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.11830711, b: 1, a: 1}
+  m_Color: {r: 0.026032386, g: 0.095111884, b: 0.6132076, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -28,7 +28,7 @@ public class ObstacleBarrier : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Enemy obj))
+        if (collision.TryGetComponent(out Garbage obj))
         {
             Destroy(obj.gameObject);
         }

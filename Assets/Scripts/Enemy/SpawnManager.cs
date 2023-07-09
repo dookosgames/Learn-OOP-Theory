@@ -19,9 +19,11 @@ public class SpawnManager : MonoBehaviour
 
     //Spawnable area defined by Camera Viewport in the CameraFollow script
     [SerializeField] CameraFollow camFollow;
+    [SerializeField] BackgroundScroller _BGScroller;
 
     [Header("Spawn Timeing")]
     [SerializeField] float _repeatWaitTime;
+    [SerializeField] float difficultMod;
 
     private GameState currentState; 
 
@@ -49,7 +51,8 @@ public class SpawnManager : MonoBehaviour
 
         while (currentState==GameState.playing)
         {
-            yield return new WaitForSeconds(_repeatWaitTime);
+            //spawn time increases each time the BG resets
+            yield return new WaitForSeconds(FindDifficulty());
             SpawnLeft();
             SpawnBottom();
         }
@@ -83,7 +86,15 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+    //ABSTRACTION
+    private float FindDifficulty()
+    {
+        float time = _repeatWaitTime - (difficultMod * _BGScroller._bgCounter);
 
+        if (time < 0) { return 0; }
+        else{ return time;
+        }
+    }
 
 
 
